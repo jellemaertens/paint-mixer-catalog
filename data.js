@@ -1,7 +1,7 @@
 // Verfmachine Data - Alle machines uit vergelijkingslijst
 // Testmodellen zijn gemarkeerd met testmodel: true
 
-const machinesData = [
+const machines = [
     // === CHAMELEON ===
     // Mengers
     { id: 1, naam: "iMix M2M PRO", fabrikant: "CHAMELEON", type: "MENGER", prijs: 4281, vermogen: "1.1 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "800x860x1100 mm", gewicht: "210 kg", capaciteit: "40 kg", laadhoogte: "540 mm", bedrijfssnelheid: "91-140 RPM", geluidsniveau: "65 dB", schudrichting: "Gyroscopic / Biaxial", veiligheidsvoorzieningen: "Emergency Stop, Sliding door, safe mode, automatic speed control", automatisering: "Automatic", gebruikersinterface: "Control panel / touch", connectiviteit: "WiFi", garantie: "1 Jaar", testmodel: true, afbeelding: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/web-product/68b00b68e651d.png", documentatie: "https://www.chameleon.ie/viewDetails/iMix%20M2M%20PRO/Gyroscopic-Mixers" },
@@ -42,9 +42,9 @@ const machinesData = [
 // Bereken statistieken
 function berekenStatistieken() {
     return {
-        totaalMachines: machinesData.length,
-        totaalFabrikanten: [...new Set(machinesData.map(m => m.fabrikant))].length,
-        totaalMengers: machinesData.filter(m => m.type === 'MENGER').length,
-        totaalSchudders: machinesData.filter(m => m.type === 'SCHUDDER').length
+        totaalMachines: machines.length,
+        totaalFabrikanten: [...new Set(machines.map(m => m.fabrikant))].length,
+        totaalMengers: machines.filter(m => m.type === 'MENGER').length,
+        totaalSchudders: machines.filter(m => m.type === 'SCHUDDER').length
     };
 }
