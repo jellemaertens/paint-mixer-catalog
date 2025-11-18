@@ -361,7 +361,7 @@
             // Add event listeners for textareas
             document.querySelectorAll('.note-textarea').forEach(textarea => {
                 textarea.addEventListener('input', function() {
-                    const counter = this.parentElement.querySelector('.char-count');
+                    const counter = this.nextElementSibling.querySelector('.char-count');
                     counter.textContent = this.value.length;
                 });
             });
