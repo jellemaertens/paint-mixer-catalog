@@ -1,97 +1,50 @@
-// Verfmachine Data - Gemakkelijk bij te werken
-// Om nieuwe machines toe te voegen, kopieer gewoon een machine object en pas de waarden aan
+// Verfmachine Data - Alle machines uit vergelijkingslijst
+// Testmodellen zijn gemarkeerd met testmodel: true
 
 const machinesData = [
-  {
-    id: 1,
-    naam: "iMix M2M PRO",
-    fabrikant: "CHAMELEON",
-    type: "MENGER",
-    prijs: 4281,
-    vermogen: "1.1 kW",
-    spanning: "230 V",
-    frequentie: "50 Hz",
-    afmetingen: "800x860x1100 mm",
-    gewicht: "210 kg",
-    capaciteit: "40 kg",
-    laadhoogte: "540 mm",
-    bedrijfssnelheid: "91-140",
-    geluidsniveau: "65 dB",
-    schudrichting: "Gyroscopic / Biaxal",
-    veiligheidsvoorzieningen: "Emergency Stop, Sliding door, safe mode, automatic speed control",
-    automatisering: "Automatic",
-    gebruikersinterface: "Control panel / touch",
-    connectiviteit: "WiFi",
-    garantie: "1 jaar",
-    testmodel: true,
-    afbeelding: "https://via.placeholder.com/400x400?text=iMix+M2M+PRO",
-    documentatie: "https://example.com/imix-m2m-pro"
-  },
-  {
-    id: 2,
-    naam: "XM-60",
-    fabrikant: "COLLOMIX",
-    type: "MENGER",
-    prijs: 3850,
-    vermogen: "1.5 kW",
-    spanning: "230 V",
-    frequentie: "50 Hz",
-    afmetingen: "750x800x1050 mm",
-    gewicht: "195 kg",
-    capaciteit: "60 kg",
-    laadhoogte: "500 mm",
-    bedrijfssnelheid: "80-120",
-    geluidsniveau: "68 dB",
-    schudrichting: "Biaxal",
-    veiligheidsvoorzieningen: "Emergency Stop, Safety lid",
-    automatisering: "Semi-automatic",
-    gebruikersinterface: "Control panel",
-    connectiviteit: "USB",
-    garantie: "2 jaar",
-    testmodel: false,
-    afbeelding: "https://via.placeholder.com/400x400?text=XM-60",
-    documentatie: "https://example.com/xm-60"
-  },
-  {
-    id: 3,
-    naam: "S-50",
-    fabrikant: "COROB",
-    type: "SCHUDDER",
-    prijs: 2950,
-    vermogen: "0.75 kW",
-    spanning: "230 V",
-    frequentie: "50 Hz",
-    afmetingen: "600x700x900 mm",
-    gewicht: "145 kg",
-    capaciteit: "30 kg",
-    laadhoogte: "450 mm",
-    bedrijfssnelheid: "100-150",
-    geluidsniveau: "62 dB",
-    schudrichting: "Linear",
-    veiligheidsvoorzieningen: "Emergency Stop, Door lock",
-    automatisering: "Manual",
-    gebruikersinterface: "Buttons",
-    connectiviteit: "None",
-    garantie: "1 jaar",
-    testmodel: false,
-    afbeelding: "https://via.placeholder.com/400x400?text=S-50",
-    documentatie: "https://example.com/s-50"
-  }
-  // Voeg hier meer machines toe...
-  // Kopieer gewoon een machine object hierboven en pas de waarden aan
+    // === CHAMELEON ===
+    // Mengers
+    { id: 1, naam: "iMix M2M PRO", fabrikant: "CHAMELEON", type: "MENGER", prijs: 4281, vermogen: "1.1 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "800x860x1100 mm", gewicht: "210 kg", capaciteit: "40 kg", laadhoogte: "540 mm", bedrijfssnelheid: "91-140 RPM", geluidsniveau: "65 dB", schudrichting: "Gyroscopic / Biaxial", veiligheidsvoorzieningen: "Emergency Stop, Sliding door, safe mode, automatic speed control", automatisering: "Automatic", gebruikersinterface: "Control panel / touch", connectiviteit: "WiFi", garantie: "1 Jaar", testmodel: true, afbeelding: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/web-product/68b00b68e651d.png", documentatie: "https://www.chameleon.ie/viewDetails/iMix%20M2M%20PRO/Gyroscopic-Mixers" },
+    { id: 2, naam: "iMix M2M", fabrikant: "CHAMELEON", type: "MENGER", prijs: 3665, vermogen: "1.1 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "800x860x1100 mm", gewicht: "210 kg", capaciteit: "40 kg", laadhoogte: "-", bedrijfssnelheid: "91-140 RPM", geluidsniveau: "65 dB", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock, safe mode", automatisering: "Automatic", gebruikersinterface: "Control panel", connectiviteit: "WiFi", garantie: "1 Jaar", testmodel: false, afbeelding: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/web-product/68b0008cc837d.png", documentatie: "https://www.chameleon.ie/viewDetails/iMix%20M2M/Gyroscopic-Mixers" },
+    { id: 3, naam: "iMix M2M sliding door", fabrikant: "CHAMELEON", type: "MENGER", prijs: null, vermogen: "1.1 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "800x860x1100 mm", gewicht: "210 kg", capaciteit: "40 kg", laadhoogte: "-", bedrijfssnelheid: "91-140 RPM", geluidsniveau: "65 dB", veiligheidsvoorzieningen: "Emergency Stop, sliding door with doolock, safe mode", automatisering: "-", gebruikersinterface: "Control panel", connectiviteit: "-", garantie: "1 Jaar", testmodel: false, afbeelding: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/web-product/61234a5ddae74.png", documentatie: "https://www.chameleon.ie/viewDetails/iMix%20M2M/Gyroscopic-Mixers" },
+    // Shakers
+    { id: 4, naam: "iShake PRO", fabrikant: "CHAMELEON", type: "SCHUDDER", prijs: 2889, vermogen: "0.75 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "670x720x1170 mm", gewicht: "190 kg", capaciteit: "40 kg", laadhoogte: "490 mm", bedrijfssnelheid: "520-762 RPM", geluidsniveau: "65 dB", veiligheidsvoorzieningen: "Emergency Stop, sliding door with doolock", automatisering: "-", gebruikersinterface: "Control panel/touchscreen", connectiviteit: "WiFi", garantie: "1 Jaar", testmodel: true, afbeelding: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/web-product/680b4f5a35a51.png", documentatie: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/files/66a7989d6464e.pdf" },
+    { id: 5, naam: "iShake", fabrikant: "CHAMELEON", type: "SCHUDDER", prijs: 2579, vermogen: "0.75 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "670x720x1170 mm", gewicht: "190 kg", capaciteit: "40 kg", laadhoogte: "490 mm", bedrijfssnelheid: "520-762 RPM", geluidsniveau: "65 dB", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock", automatisering: "-", gebruikersinterface: "Control panel", connectiviteit: "-", garantie: "1 Jaar", testmodel: false, afbeelding: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/web-product/61234b005d204.png", documentatie: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/files/5e4169227e555.pdf" },
+    { id: 6, naam: "iShake M2M ? 2025", fabrikant: "CHAMELEON", type: "SCHUDDER", prijs: null, vermogen: "-", spanning: "-", frequentie: "-", afmetingen: "-", gewicht: "-", capaciteit: "-", laadhoogte: "-", bedrijfssnelheid: "-", geluidsniveau: "-", veiligheidsvoorzieningen: "-", automatisering: "-", gebruikersinterface: "-", connectiviteit: "-", garantie: "1 Jaar", testmodel: false, afbeelding: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/web-product/68b00b481f87f.png", documentatie: "" },
+    { id: 7, naam: "eShake", fabrikant: "CHAMELEON", type: "SCHUDDER", prijs: null, vermogen: "0.75 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "670x720x1170 mm", gewicht: "190 kg", capaciteit: "40 kg", laadhoogte: "490 mm", bedrijfssnelheid: "-", geluidsniveau: "65 dB", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock", automatisering: "Automatic", gebruikersinterface: "buttons", connectiviteit: "-", garantie: "1 Jaar", testmodel: false, afbeelding: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/web-product/61234d9487b97.png", documentatie: "https://s3-eu-west-1.amazonaws.com/dev.chameleon/files/5e416db93ae4a.pdf" },
+
+    // === COLLOMIX ===
+    // Shakers
+    { id: 8, naam: "Viro Neo", fabrikant: "COLLOMIX", type: "SCHUDDER", prijs: 3225, vermogen: "0.9 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "675x542x1169 mm", gewicht: "115 kg", capaciteit: "35 kg", laadhoogte: "495 mm", bedrijfssnelheid: "660 RPM", geluidsniveau: "74.2 dB", schudrichting: "monodirectional", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock", automatisering: "automatic", gebruikersinterface: "control panel", connectiviteit: "smart CONNECT", garantie: "1 Jaar", testmodel: true, afbeelding: "https://www.collomix.com/01-20-Bilder-Produktbilder-color.TEC-Shaker-VIRO/5429-image-thumb__5429__product-gallery-image/PB-VIRO-neo.jpg", documentatie: "https://www.collomix.com/03-20-Dokumente-Variants%20.color.TEC-Datenbl%C3%A4tter%202%26%20Flyer-Produktbrosch%C3%BCre-Shaker-VIRO-neo/DB-VIRO%20neo-EN-ebook.pdf" },
+    { id: 9, naam: "Viba X.30", fabrikant: "COLLOMIX", type: "SCHUDDER", prijs: 4450, vermogen: "0.9 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "735x590x1208 mm", gewicht: "130 kg", capaciteit: "40 kg", laadhoogte: "497 mm", bedrijfssnelheid: "660 RPM", geluidsniveau: "74.2 dB", schudrichting: "monodirectional", veiligheidsvoorzieningen: "Emergency Stop, automatic open sliding door", automatisering: "Automatic", gebruikersinterface: "control panel", connectiviteit: "smart CONNECT", garantie: "1 Jaar", testmodel: true, afbeelding: "https://www.collomix.com/01-20-Bilder-Produktbilder-color.TEC-Shaker-VIBA/6410-image-thumb__6410__product-gallery-image/PB-Viba-X30-02.png", documentatie: "https://www.collomix.com/03-20-Dokumente-Variants%20.color.TEC-Datenbl%C3%A4tter%202%26%20Flyer-Produktbrosch%C3%BCre-Shaker-VIBA-VIBA/VIBA%20X.30%2C%20X.30%20V/DB-VIBA%20X.30-EN-ebook.pdf" },
+    // Mengers
+    { id: 10, naam: "Toro Neo", fabrikant: "COLLOMIX", type: "MENGER", prijs: 4250, vermogen: "1.1 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "782x811x1007 mm", gewicht: "152 kg", capaciteit: "40 kg", laadhoogte: "385 mm", bedrijfssnelheid: "145 RPM", geluidsniveau: "65 dB", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock", automatisering: "Automatic", gebruikersinterface: "control panel", connectiviteit: "smart CONNECT", garantie: "1 Jaar", testmodel: false, afbeelding: "https://www.collomix.com/01-20-Bilder-Produktbilder-color.TEC-Biaxialmischer-TORO/5427-image-thumb__5427__product-gallery-image/PB-TORO-Neo.png", documentatie: "https://www.collomix.com/03-20-Dokumente-Variants%20.color.TEC-Datenbl%C3%A4tter%202%26%20Flyer-Produktbrosch%C3%BCre-Biaxialmischer-TORO-TORO-neo/DB-TORO%20neo-EN-ebook.pdf" },
+    { id: 11, naam: "Rota X.40", fabrikant: "COLLOMIX", type: "MENGER", prijs: 6150, vermogen: "1.1 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "796x986x1174 mm", gewicht: "176 kg", capaciteit: "40 kg", laadhoogte: "455 mm", bedrijfssnelheid: "145 RPM", geluidsniveau: "65 dB", schudrichting: "Gyroscopic", veiligheidsvoorzieningen: "Emergency Stop, automatic open sliding door", automatisering: "Automatic", gebruikersinterface: "control panel", connectiviteit: "smart CONNECT", garantie: "1 Jaar", testmodel: true, afbeelding: "https://www.collomix.com/01-20-Bilder-Produktbilder-color.TEC-Biaxialmischer-ROTA/6385-image-thumb__6385__product-gallery-image/PB-Rota-X40-02.png", documentatie: "https://www.collomix.com/03-20-Dokumente-Variants%20.color.TEC-Datenbl%C3%A4tter%202%26%20Flyer-Produktbrosch%C3%BCre-Biaxialmischer-ROTA-ROTA%20X.40/DB-Rota%20X40-EN-ebook.pdf" },
+    { id: 12, naam: "BIAX 35", fabrikant: "COLLOMIX", type: "MENGER", prijs: 6900, vermogen: "1.1 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "760x834x1112 mm", gewicht: "209 kg", capaciteit: "40 kg", laadhoogte: "445 mm", bedrijfssnelheid: "160 RPM", geluidsniveau: "64 dB", schudrichting: "Gyroscopic", veiligheidsvoorzieningen: "Emergency Stop, sliding door with doorlock", automatisering: "-", gebruikersinterface: "-", connectiviteit: "-", garantie: "1 Jaar", testmodel: false, afbeelding: "https://www.collomix.com/01-20-Bilder-Produktbilder-color.TEC-Biaxialmischer-BIAX/5422-image-thumb__5422__product-gallery-image/PB-BIAX-35.jpg", documentatie: "" },
+    { id: 13, naam: "BIAX 45", fabrikant: "COLLOMIX", type: "MENGER", prijs: 9450, vermogen: "1.5 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "760x834x1112 mm", gewicht: "209 kg", capaciteit: "50 kg", laadhoogte: "445 mm", bedrijfssnelheid: "160 RPM", geluidsniveau: "64 dB", schudrichting: "Gyroscopic", veiligheidsvoorzieningen: "Emergency Stop, sliding door with doorlock", automatisering: "-", gebruikersinterface: "-", connectiviteit: "-", garantie: "1 Jaar", testmodel: false, afbeelding: "https://www.collomix.com/01-20-Bilder-Produktbilder-color.TEC-Biaxialmischer-BIAX/5421-image-thumb__5421__product-gallery-image/PB-BIAX.jpg", documentatie: "" },
+
+    // === COROB ===
+    // Mengers
+    { id: 14, naam: "Clevermix 700E", fabrikant: "COROB", type: "MENGER", prijs: 3995, vermogen: "0.55 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "805x782x1112 mm", gewicht: "163 kg", capaciteit: "40 kg", laadhoogte: "-", bedrijfssnelheid: "automatic according to cansize", geluidsniveau: "70 dB", schudrichting: "Bi-directional", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock, sliding door or shutter", automatisering: "Automatic", gebruikersinterface: "Control panel", connectiviteit: "usb", garantie: "1 Jaar", testmodel: true, afbeelding: "https://www.corob.com/wp-content/uploads/2023/06/CMIX700-03-T.png", documentatie: "https://www.corob.com/wp-content/download-area/documentation/Brochures/Brochure-CLEVERmix%20700E-v06.pdf" },
+    // Shakers
+    { id: 15, naam: "Evoshake 200", fabrikant: "COROB", type: "SCHUDDER", prijs: 2790, vermogen: "0.55 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "616x602x1132 mm", gewicht: "185 kg", capaciteit: "35 kg", laadhoogte: "415 mm", bedrijfssnelheid: "680 RPM", geluidsniveau: "70 dB", schudrichting: "monodirectional", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock", automatisering: "-", gebruikersinterface: "Control panel", connectiviteit: "usb", garantie: "1 Jaar", testmodel: false, afbeelding: "https://www.corob.com/wp-content/uploads/2023/10/Eshake-200-04-T.png", documentatie: "https://www.corob.com/products/mixers-shakers/shakers/evoshake-200" },
+    { id: 16, naam: "Evoshake 700", fabrikant: "COROB", type: "SCHUDDER", prijs: 3860, vermogen: "0.55 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "616x607x1132 mm", gewicht: "192 kg", capaciteit: "35 kg", laadhoogte: "415 mm", bedrijfssnelheid: "Pre-set or automatically selected Variable customization", geluidsniveau: "70 dB", schudrichting: "Bi-directional", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock or sliding door", automatisering: "-", gebruikersinterface: "Control panel", connectiviteit: "usb", garantie: "1 Jaar", testmodel: true, afbeelding: "https://www.corob.com/wp-content/uploads/2023/10/Eshake-700-04-T.png", documentatie: "https://www.corob.com/products/mixers-shakers/shakers/evoshake-700" },
+
+    // === FAST & FLUID ===
+    // Mengers
+    { id: 17, naam: "GX300", fabrikant: "FAST & FLUID", type: "MENGER", prijs: 3450, vermogen: "0.75 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "820x840x1030 mm", gewicht: "215 kg", capaciteit: "40 kg", laadhoogte: "-", bedrijfssnelheid: "80-230 RPM", geluidsniveau: "78 dB", schudrichting: "Gyroscopic", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock, table lock", automatisering: "Automatic", gebruikersinterface: "control panel", connectiviteit: "USB Wifi", garantie: "1 Jaar", testmodel: false, afbeelding: "https://fast-fluid.com/emea/wp-content/uploads/sites/3/2025/01/GX300-%E2%80%93-1.jpg", documentatie: "https://fast-fluid.com/emea/products/gx300-automatic-mixer" },
+    { id: 18, naam: "GA480", fabrikant: "FAST & FLUID", type: "MENGER", prijs: 4250, vermogen: "0.75 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "820x810x1010 mm", gewicht: "240 kg", capaciteit: "40 kg", laadhoogte: "-", bedrijfssnelheid: "90-230 RPM", geluidsniveau: "65 dB", schudrichting: "Gyroscopic", veiligheidsvoorzieningen: "Emergency Stop, hinged door with doolock, table lock", automatisering: "Automatic", gebruikersinterface: "control panel", connectiviteit: "USB Wifi", garantie: "1 Jaar", testmodel: true, afbeelding: "https://fast-fluid.com/emea/wp-content/uploads/sites/3/2024/11/GA480-automatic-mixer-2.jpg", documentatie: "https://fast-fluid.com/emea/products/ga480-automatic-mixer" },
+    // Shakers
+    { id: 19, naam: "SK350", fabrikant: "FAST & FLUID", type: "SCHUDDER", prijs: 2850, vermogen: "0.75 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "610x720x1160 mm", gewicht: "190 kg", capaciteit: "35 kg", laadhoogte: "-", bedrijfssnelheid: "680 RPM", geluidsniveau: "-", schudrichting: "Bi-directional", veiligheidsvoorzieningen: "Emergency Stop, sliding door with doorlock", automatisering: "Automatic", gebruikersinterface: "control panel", connectiviteit: "USB Wifi", garantie: "1 Jaar", testmodel: false, afbeelding: "https://fast-fluid.com/emea/wp-content/uploads/sites/3/2024/11/SK350-paint-shaker.jpg", documentatie: "https://fast-fluid.com/emea/products/sk350-automatic-shaker" },
+    { id: 20, naam: "SK550 1.1", fabrikant: "FAST & FLUID", type: "SCHUDDER", prijs: 3950, vermogen: "0.75 kW", spanning: "230 V", frequentie: "50 Hz", afmetingen: "610x720x1160 mm", gewicht: "190 kg", capaciteit: "40 kg", laadhoogte: "-", bedrijfssnelheid: "680 slow start", geluidsniveau: "-", schudrichting: "Bi-directional", veiligheidsvoorzieningen: "Emergency Stop, sliding door with doorlock", automatisering: "Automatic", gebruikersinterface: "control panel", connectiviteit: "USB Wifi", garantie: "1 Jaar", testmodel: true, afbeelding: "https://fast-fluid.com/emea/wp-content/uploads/sites/3/2025/03/SK550-1.1.jpg", documentatie: "https://fast-fluid.com/emea/products/sk550-1-1-automatic-shaker" }
 ];
 
-// Functie om de totale statistieken te berekenen
+// Bereken statistieken
 function berekenStatistieken() {
-  const fabrikanten = [...new Set(machinesData.map(m => m.fabrikant))];
-  const mengers = machinesData.filter(m => m.type === "MENGER");
-  const schudders = machinesData.filter(m => m.type === "SCHUDDER");
-  
-  return {
-    totaalMachines: machinesData.length,
-    aantalFabrikanten: fabrikanten.length,
-    aantalMengers: mengers.length,
-    aantalSchudders: schudders.length,
-    fabrikanten: fabrikanten
-  };
+    return {
+        totaalMachines: machinesData.length,
+        totaalFabrikanten: [...new Set(machinesData.map(m => m.fabrikant))].length,
+        totaalMengers: machinesData.filter(m => m.type === 'MENGER').length,
+        totaalSchudders: machinesData.filter(m => m.type === 'SCHUDDER').length
+    };
 }
