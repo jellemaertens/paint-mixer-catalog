@@ -307,65 +307,72 @@
             });
         }
         
-        function renderMachines() {
-            const fabrikantFilter = document.getElementById('filterFabrikant').value;
-            const typeFilter = document.getElementById('filterType').value;
-            const prijsMax = document.getElementById('filterPrijsMax').value;
-            
-            let filtered = machines;
-            
-            if (fabrikantFilter) {
-                filtered = filtered.filter(m => m.fabrikant === fabrikantFilter);
-            }
-            if (typeFilter) {
-                filtered = filtered.filter(m => m.type === typeFilter);
-            }
-            if (prijsMax) {
-                filtered = filtered.filter(m => m.prijs <= parseFloat(prijsMax));
-            }
-            
-            const grid = document.getElementById('machineGrid');
-            grid.innerHTML = filtered.map(machine =>`
-                <div class="machine-card">
-                    <input type="checkbox" class="machine-checkbox" data-id="${machine.id}">
-                    <img src="${machine.afbeelding}" alt="${machine.naam}" class="machine-image">
-                    <div class="machine-content">
-                        <div class="machine-header">
-                            <div class="machine-name">${machine.naam}</div>
-                            <div class="machine-manufacturer">${machine.fabrikant}</div>
-                        </div>
-                        <div class="machine-badges">
-                            <span class="machine-badge ${machine.type === 'MENGER' ? 'badge-menger' : 'badge-schudder'}">${machine.type}</span>
-                            ${machine.testmodel ? '<span class="machine-badge testmodel-badge">TESTMODEL</span>' : ''}
-                        </div>
-                        <div class="machine-price">€${machine.prijs.toLocaleString()}</div>
-                        <div class="machine-specs">
-                            <div><strong>Vermogen:</strong> <span>${machine.vermogen}</span></div>
-                            <div><strong>Capaciteit:</strong> <span>${machine.capaciteit}</span></div>
-                            <div><strong>Gewicht:</strong> <span>${machine.gewicht}</span></div>
-                            <div><strong>Geluidsniveau:</strong> <span>${machine.geluidsniveau}</span></div>
-                        </div>
-                        <div class="machine-buttons">
-                            <button class="btn-details" onclick="alert('Details voor ${machine.naam}')">Details</button>
-                            <button class="btn-docs" onclick="window.open('${machine.documentatie}', '_blank')">Documentatie</button>
-                        </div>
-                        <div class="machine-note">
-                            <div class="note-label">Jouw notitie:</div>
-                            <textarea class="note-textarea" data-id="${machine.id}" maxlength="500" placeholder="Voeg een notitie toe (max 500 tekens)..."></textarea>
-                            <div class="note-counter"><span class="char-count">0</span>/500</div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            
-            // Add event listeners for textareas
-            document.querySelectorAll('.note-textarea').forEach(textarea => {
-                textarea.addEventListener('input', function() {
-                    const counter = this.nextElementSibling.querySelector('.char-count');
-                    counter.textContent = this.value.length;
-                });
-            });
-        }
+function renderMachines() {
+    const fabrikantFilter = document.getElementById('filterFabrikant').value;
+    const typeFilter = document.getElementById('filterType').value;
+    const prijsMax = document.getElementById('filterPrijsMax').value;
+    
+    let filtered = machines;
+    
+    if (fabrikantFilter) {
+        filtered = filtered.filter(m => m.fabrikant === fabrikantFilter);
+    }
+    if (typeFilter) {
+        filtered = filtered.filter(m => m.type === typeFilter);
+    }
+    if (prijsMax) {
+        filtered = filtered.filter(m => m.prijs <= parseFloat(prijsMax));
+    }
+    
+    const grid = document.getElementById('machineGrid');
+    
+    // Gebruik string concatenatie in plaats van template literals
+    grid.innerHTML = filtered.map(function(machine) {
+        const badgeClass = machine.type === 'MENGER' ? 'badge-menger' : 'badge-schudder';
+        const testmodelBadge = machine.testmodel ? '<span class="machine-badge testmodel-badge">TESTMODEL</span>' : '';
+        const prijs = machine.prijs ? '€' + machine.prijs.toLocaleString() : 'Prijs op aanvraag';
+        
+        return '<div class="machine-card">' +
+            '<input type="checkbox" class="machine-checkbox" data-id="' + machine.id + '">' +
+            '<img src="' + machine.afbeelding + '" alt="' + machine.naam + '" class="machine-image">' +
+            '<div class="machine-content">' +
+                '<div class="machine-header">' +
+                    '<div class="machine-name">' + machine.naam + '</div>' +
+                    '<div class="machine-manufacturer">' + machine.fabrikant + '</div>' +
+                '</div>' +
+                '<div class="machine-badges">' +
+                    '<span class="machine-badge ' + badgeClass + '">' + machine.type + '</span>' +
+                    testmodelBadge +
+                '</div>' +
+                '<div class="machine-price">' + prijs + '</div>' +
+                '<div class="machine-specs">' +
+                    '<div><strong>Vermogen:</strong> <span>' + machine.vermogen + '</span></div>' +
+                    '<div><strong>Capaciteit:</strong> <span>' + machine.capaciteit + '</span></div>' +
+                    '<div><strong>Gewicht:</strong> <span>' + machine.gewicht + '</span></div>' +
+                    '<div><strong>Geluidsniveau:</strong> <span>' + machine.geluidsniveau + '</span></div>' +
+                '</div>' +
+                '<div class="machine-buttons">' +
+                    '<button class="btn-details" onclick="alert(\'Details voor ' + machine.naam + '\')">Details</button>' +
+                    '<button class="btn-docs" onclick="window.open(\'' + machine.documentatie + '\', \'_blank\')">Documentatie</button>' +
+                '</div>' +
+                '<div class="machine-note">' +
+                    '<div class="note-label">Jouw notitie:</div>' +
+                    '<textarea class="note-textarea" data-id="' + machine.id + '" maxlength="500" placeholder="Voeg een notitie toe (max 500 tekens)..."></textarea>' +
+                    '<div class="note-counter"><span class="char-count">0</span>/500</div>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+    }).join('');
+    
+    // Add event listeners for textareas
+    document.querySelectorAll('.note-textarea').forEach(textarea => {
+        textarea.addEventListener('input', function() {
+            const counter = this.nextElementSibling.querySelector('.char-count');
+            counter.textContent = this.value.length;
+        });
+    });
+}
+
         
         // Event listeners
         document.getElementById('filterFabrikant').addEventListener('change', renderMachines);
