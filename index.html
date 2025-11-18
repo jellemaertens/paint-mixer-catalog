@@ -459,7 +459,7 @@ function renderMachines() {
                     '<div><strong>Geluidsniveau:</strong> <span>' + machine.geluidsniveau + '</span></div>' +
                 '</div>' +
                 '<div class="machine-buttons">' +
-                                        '<button class="btn-details" onclick="showMachineDetails(machine)">Details</button>' +
+                                        '<button class="btn-details" onclick="showMachineDetails(' + machine.id + ')">Details</button>' +
                     '<button class="btn-docs" onclick="window.open(\'' + machine.documentatie + '\', \'_blank\')">Documentatie</button>' +
                     '<textarea class="note-textarea" data-id="' + machine.id + '" maxlength="500" placeholder="Voeg een notitie toe (max 500 tekens)..."></textarea>' +
                     '<div class="note-counter"><span class="char-count">0</span>/500</div>' +
@@ -490,8 +490,9 @@ function renderMachines() {
     </script>
 
             // Details Modal Functions
-        function showMachineDetails(machine) {
-            const modal = document.getElementById('detailsModal');
+            function showMachineDetails(machineId) {
+
+                const machine = machines.find(m => m.id === machineId);
         <script>
             const modalTitle = document.getElementById('modalTitle');
             const modalBody = document.getElementById('modalBody');
