@@ -17,7 +17,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 12px;
@@ -79,22 +79,34 @@
         }
         .machine-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
         }
         .machine-card {
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
         .machine-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .machine-checkbox {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 24px;
+            height: 24px;
+            z-index: 10;
+            cursor: pointer;
         }
         .machine-image {
             width: 100%;
-            height: 200px;
+            height: 280px;
             object-fit: cover;
             background: #f0f0f0;
         }
@@ -102,26 +114,43 @@
             padding: 20px;
         }
         .machine-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .machine-name {
             font-size: 20px;
             font-weight: bold;
             color: #333;
-        }
-        .machine-badge {
-            background: #667eea;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
+            margin-bottom: 5px;
         }
         .machine-manufacturer {
             color: #666;
-            margin-bottom: 10px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .machine-badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .machine-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .badge-menger {
+            background: #667eea;
+            color: white;
+        }
+        .badge-schudder {
+            background: #764ba2;
+            color: white;
+        }
+        .testmodel-badge {
+            background: #28a745;
+            color: white;
         }
         .machine-price {
             font-size: 24px;
@@ -130,38 +159,83 @@
             margin-bottom: 15px;
         }
         .machine-specs {
-            list-style: none;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
             margin-bottom: 15px;
         }
-        .machine-specs li {
-            padding: 5px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
+        .machine-specs div {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 13px;
         }
-        .machine-specs li:last-child {
-            border-bottom: none;
+        .machine-specs strong {
+            color: #333;
         }
-        button {
-            background: #667eea;
+        .machine-specs span {
+            color: #666;
+        }
+        .machine-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .btn-details {
+            background: #17a2b8;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
             font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
             transition: background 0.3s;
         }
-        button:hover {
-            background: #5568d3;
+        .btn-details:hover {
+            background: #138496;
         }
-        .testmodel-badge {
-            background: #28a745;
+        .btn-docs {
+            background: white;
+            color: #17a2b8;
+            border: 2px solid #17a2b8;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-docs:hover {
+            background: #17a2b8;
             color: white;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 11px;
-            margin-left: 8px;
+        }
+        .machine-note {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 15px;
+        }
+        .note-label {
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .note-textarea {
+            width: 100%;
+            min-height: 70px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+            resize: vertical;
+        }
+        .note-counter {
+            text-align: right;
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
         }
     </style>
 </head>
@@ -170,7 +244,24 @@
         <h1>Verfmachine Vergelijker</h1>
         <p class="subtitle">Professionele meng- en schudmachines voor de verfindustrie</p>
         
-        <div class="stats" id="stats"></div>
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalMachines">0</div>
+                <div class="stat-label">TOTAAL MACHINES</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalFabrikanten">0</div>
+                <div class="stat-label">FABRIKANTEN</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalMengers">0</div>
+                <div class="stat-label">MENGERS</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalSchudders">0</div>
+                <div class="stat-label">SCHUDDERS</div>
+            </div>
+        </div>
         
         <div class="filters">
             <div class="filter-group">
@@ -196,41 +287,18 @@
         <div class="machine-grid" id="machineGrid"></div>
     </div>
     
-    <script src="data.js?v=20"></script>
-        "></script>
+    <script src="data.js?v=21"></script>
     <script>
-        // Render statistieken
         function renderStats() {
-            const stats = {
-                totaalMachines: machinesData.length,
-                aantalFabrikanten: [...new Set(machinesData.map(m => m.fabrikant))].length,
-                aantalMengers: machinesData.filter(m => m.type === 'MENGER').length,
-                aantalSchudders: machinesData.filter(m => m.type === 'SCHUDDER').length
-            };
-            
-            document.getElementById('stats').innerHTML = `
-                <div class="stat-card">
-                    <div class="stat-number">${stats.totaalMachines}</div>
-                    <div class="stat-label">TOTAAL MACHINES</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">${stats.aantalFabrikanten}</div>
-                    <div class="stat-label">FABRIKANTEN</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">${stats.aantalMengers}</div>
-                    <div class="stat-label">MENGERS</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">${stats.aantalSchudders}</div>
-                    <div class="stat-label">SCHUDDERS</div>
-                </div>
-            `;
+            const stats = berekenStatistieken();
+            document.getElementById('totalMachines').textContent = stats.totaal;
+            document.getElementById('totalFabrikanten').textContent = stats.fabrikanten;
+            document.getElementById('totalMengers').textContent = stats.mengers;
+            document.getElementById('totalSchudders').textContent = stats.schudders;
         }
         
-        // Render fabrikanten in filter
         function renderFabrikanten() {
-            const fabrikanten = [...new Set(machinesData.map(m => m.fabrikant))].sort();
+            const fabrikanten = [...new Set(machines.map(m => m.fabrikant))].sort();
             const select = document.getElementById('filterFabrikant');
             fabrikanten.forEach(fab => {
                 const option = document.createElement('option');
@@ -240,50 +308,64 @@
             });
         }
         
-        // Render machines
         function renderMachines() {
-            const fabrikant = document.getElementById('filterFabrikant').value;
-            const type = document.getElementById('filterType').value;
-            const maxPrijs = document.getElementById('filterPrijsMax').value;
+            const fabrikantFilter = document.getElementById('filterFabrikant').value;
+            const typeFilter = document.getElementById('filterType').value;
+            const prijsMax = document.getElementById('filterPrijsMax').value;
             
-            let filtered = machinesData;
+            let filtered = machines;
             
-            if (fabrikant) {
-                filtered = filtered.filter(m => m.fabrikant === fabrikant);
+            if (fabrikantFilter) {
+                filtered = filtered.filter(m => m.fabrikant === fabrikantFilter);
             }
-            if (type) {
-                filtered = filtered.filter(m => m.type === type);
+            if (typeFilter) {
+                filtered = filtered.filter(m => m.type === typeFilter);
             }
-            if (maxPrijs) {
-                filtered = filtered.filter(m => m.prijs <= parseInt(maxPrijs));
+            if (prijsMax) {
+                filtered = filtered.filter(m => m.prijs <= parseFloat(prijsMax));
             }
             
             const grid = document.getElementById('machineGrid');
             grid.innerHTML = filtered.map(machine => `
                 <div class="machine-card">
+                    <input type="checkbox" class="machine-checkbox" data-id="${machine.id}">
                     <img src="${machine.afbeelding}" alt="${machine.naam}" class="machine-image">
                     <div class="machine-content">
                         <div class="machine-header">
-                            <div>
-                                <div class="machine-name">
-                                    ${machine.naam}
-                                    ${machine.testmodel ? '<span class="testmodel-badge">TESTMODEL</span>' : ''}
-                                </div>
-                                <div class="machine-manufacturer">${machine.fabrikant}</div>
-                            </div>
-                            <span class="machine-badge">${machine.type}</span>
+                            <div class="machine-name">${machine.naam}</div>
+                            <div class="machine-manufacturer">${machine.fabrikant}</div>
+                        </div>
+                        <div class="machine-badges">
+                            <span class="machine-badge ${machine.type === 'MENGER' ? 'badge-menger' : 'badge-schudder'}">${machine.type}</span>
+                            ${machine.testmodel ? '<span class="machine-badge testmodel-badge">TESTMODEL</span>' : ''}
                         </div>
                         <div class="machine-price">€${machine.prijs.toLocaleString()}</div>
-                        <ul class="machine-specs">
-                            <li><strong>Vermogen:</strong> ${machine.vermogen}</li>
-                            <li><strong>Capaciteit:</strong> ${machine.capaciteit}</li>
-                            <li><strong>Gewicht:</strong> ${machine.gewicht}</li>
-                            <li><strong>Geluidsniveau:</strong> ${machine.geluidsniveau}</li>
-                        </ul>
-                        <button onclick="window.open('${machine.documentatie}', '_blank')">Documentatie</button>
+                        <div class="machine-specs">
+                            <div><strong>Vermogen:</strong> <span>${machine.vermogen}</span></div>
+                            <div><strong>Capaciteit:</strong> <span>${machine.capaciteit}</span></div>
+                            <div><strong>Gewicht:</strong> <span>${machine.gewicht}</span></div>
+                            <div><strong>Geluidsniveau:</strong> <span>${machine.geluidsniveau}</span></div>
+                        </div>
+                        <div class="machine-buttons">
+                            <button class="btn-details" onclick="alert('Details voor ${machine.naam}')">Details</button>
+                            <button class="btn-docs" onclick="window.open('${machine.documentatie}', '_blank')">Documentatie</button>
+                        </div>
+                        <div class="machine-note">
+                            <div class="note-label">Jouw notitie:</div>
+                            <textarea class="note-textarea" data-id="${machine.id}" maxlength="500" placeholder="Voeg een notitie toe (max 500 tekens)..."></textarea>
+                            <div class="note-counter"><span class="char-count">0</span>/500</div>
+                        </div>
                     </div>
                 </div>
             `).join('');
+            
+            // Add event listeners for textareas
+            document.querySelectorAll('.note-textarea').forEach(textarea => {
+                textarea.addEventListener('input', function() {
+                    const counter = this.parentElement.querySelector('.char-count');
+                    counter.textContent = this.value.length;
+                });
+            });
         }
         
         // Event listeners
