@@ -82,7 +82,7 @@ const machinesData = [
 ];
 
 // Functie om de totale statistieken te berekenen
-function bereken Statistieken() {
+function berekenStatistieken() {
   const fabrikanten = [...new Set(machinesData.map(m => m.fabrikant))];
   const mengers = machinesData.filter(m => m.type === "MENGER");
   const schudders = machinesData.filter(m => m.type === "SCHUDDER");
