@@ -290,10 +290,10 @@
     <script src="data.js?v=20"></script>    <script>
         function renderStats() {
             const stats = berekenStatistieken();
-            document.getElementById('totalMachines').textContent = stats.totaal;
-            document.getElementById('totalFabrikanten').textContent = stats.fabrikanten;
-            document.getElementById('totalMengers').textContent = stats.mengers;
-            document.getElementById('totalSchudders').textContent = stats.schudders;
+            document.getElementById('totalMachines').textContent = stats.totaalMachines;
+            document.getElementById('totalFabrikanten').textContent = stats.totaalFabrikanten;
+            document.getElementById('totalMengers').textContent = stats.totaalMengers;
+            document.getElementById('totalSchudders').textContent = stats.totaalSchudders;
         }
         
         function renderFabrikanten() {
