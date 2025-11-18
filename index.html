@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verfmachine Vergelijker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 8px;
+        }
+        .filters {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .machine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .machine-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .machine-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .machine-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+        .machine-content {
+            padding: 20px;
+        }
+        .machine-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+        .machine-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .machine-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .machine-manufacturer {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .machine-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        .machine-specs {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+        .machine-specs li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        .machine-specs li:last-child {
+            border-bottom: none;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .testmodel-badge {
+            background: #28a745;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verfmachine Vergelijker</h1>
+        <p class="subtitle">Professionele meng- en schudmachines voor de verfindustrie</p>
+        
+        <div class="stats" id="stats"></div>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label for="filterFabrikant">Fabrikant:</label>
+                <select id="filterFabrikant">
+                    <option value="">Alle fabrikanten</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filterType">Type:</label>
+                <select id="filterType">
+                    <option value="">Alle types</option>
+                    <option value="MENGER">Menger</option>
+                    <option value="SCHUDDER">Schudder</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filterPrijsMax">Max Prijs (€):</label>
+                <input type="number" id="filterPrijsMax" placeholder="Geen maximum">
+            </div>
+        </div>
+        
+        <div class="machine-grid" id="machineGrid"></div>
+    </div>
+    
+    <script src="data.js"></script>
+    <script>
+        // Render statistieken
+        function renderStats() {
+            const stats = {
+                totaalMachines: machinesData.length,
+                aantalFabrikanten: [...new Set(machinesData.map(m => m.fabrikant))].length,
+                aantalMengers: machinesData.filter(m => m.type === 'MENGER').length,
+                aantalSchudders: machinesData.filter(m => m.type === 'SCHUDDER').length
+            };
+            
+            document.getElementById('stats').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${stats.totaalMachines}</div>
+                    <div class="stat-label">TOTAAL MACHINES</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.aantalFabrikanten}</div>
+                    <div class="stat-label">FABRIKANTEN</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.aantalMengers}</div>
+                    <div class="stat-label">MENGERS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.aantalSchudders}</div>
+                    <div class="stat-label">SCHUDDERS</div>
+                </div>
+            `;
+        }
+        
+        // Render fabrikanten in filter
+        function renderFabrikanten() {
+            const fabrikanten = [...new Set(machinesData.map(m => m.fabrikant))].sort();
+            const select = document.getElementById('filterFabrikant');
+            fabrikanten.forEach(fab => {
+                const option = document.createElement('option');
+                option.value = fab;
+                option.textContent = fab;
+                select.appendChild(option);
+            });
+        }
+        
+        // Render machines
+        function renderMachines() {
+            const fabrikant = document.getElementById('filterFabrikant').value;
+            const type = document.getElementById('filterType').value;
+            const maxPrijs = document.getElementById('filterPrijsMax').value;
+            
+            let filtered = machinesData;
+            
+            if (fabrikant) {
+                filtered = filtered.filter(m => m.fabrikant === fabrikant);
+            }
+            if (type) {
+                filtered = filtered.filter(m => m.type === type);
+            }
+            if (maxPrijs) {
+                filtered = filtered.filter(m => m.prijs <= parseInt(maxPrijs));
+            }
+            
+            const grid = document.getElementById('machineGrid');
+            grid.innerHTML = filtered.map(machine => `
+                <div class="machine-card">
+                    <img src="${machine.afbeelding}" alt="${machine.naam}" class="machine-image">
+                    <div class="machine-content">
+                        <div class="machine-header">
+                            <div>
+                                <div class="machine-name">
+                                    ${machine.naam}
+                                    ${machine.testmodel ? '<span class="testmodel-badge">TESTMODEL</span>' : ''}
+                                </div>
+                                <div class="machine-manufacturer">${machine.fabrikant}</div>
+                            </div>
+                            <span class="machine-badge">${machine.type}</span>
+                        </div>
+                        <div class="machine-price">€${machine.prijs.toLocaleString()}</div>
+                        <ul class="machine-specs">
+                            <li><strong>Vermogen:</strong> ${machine.vermogen}</li>
+                            <li><strong>Capaciteit:</strong> ${machine.capaciteit}</li>
+                            <li><strong>Gewicht:</strong> ${machine.gewicht}</li>
+                            <li><strong>Geluidsniveau:</strong> ${machine.geluidsniveau}</li>
+                        </ul>
+                        <button onclick="window.open('${machine.documentatie}', '_blank')">Documentatie</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Event listeners
+        document.getElementById('filterFabrikant').addEventListener('change', renderMachines);
+        document.getElementById('filterType').addEventListener('change', renderMachines);
+        document.getElementById('filterPrijsMax').addEventListener('input', renderMachines);
+        
+        // Initialiseer
+        renderStats();
+        renderFabrikanten();
+        renderMachines();
+    </script>
+</body>
+</html>
