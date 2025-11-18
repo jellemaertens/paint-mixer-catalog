@@ -237,6 +237,113 @@
             color: #999;
             margin-top: 4px;
         }
+
+                /* Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1000px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .close {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: #ddd;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .detail-section {
+            margin-bottom: 25px;
+        }
+        
+        .detail-section h3 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .detail-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .detail-value {
+            color: #666;
+        }
+        
+        .machine-detail-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px auto;
+            display: block;
+        }
+        
+        .detail-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -352,11 +459,8 @@ function renderMachines() {
                     '<div><strong>Geluidsniveau:</strong> <span>' + machine.geluidsniveau + '</span></div>' +
                 '</div>' +
                 '<div class="machine-buttons">' +
-                    '<button class="btn-details" onclick="alert(\'Details voor ' + machine.naam + '\')">Details</button>' +
+                                        '<button class="btn-details" onclick="showMachineDetails(machine)">Details</button>' +
                     '<button class="btn-docs" onclick="window.open(\'' + machine.documentatie + '\', \'_blank\')">Documentatie</button>' +
-                '</div>' +
-                '<div class="machine-note">' +
-                    '<div class="note-label">Jouw notitie:</div>' +
                     '<textarea class="note-textarea" data-id="' + machine.id + '" maxlength="500" placeholder="Voeg een notitie toe (max 500 tekens)..."></textarea>' +
                     '<div class="note-counter"><span class="char-count">0</span>/500</div>' +
                 '</div>' +
@@ -384,5 +488,107 @@ function renderMachines() {
         renderFabrikanten();
         renderMachines();
     </script>
+
+            // Details Modal Functions
+        function showMachineDetails(machine) {
+            const modal = document.getElementById('detailsModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = machine.naam;
+            
+            let html = '';
+            
+            // Image
+            if (machine.afbeelding) {
+                html += '<img src="' + machine.afbeelding + '" alt="' + machine.naam + '" class="machine-detail-image">';
+            }
+            
+            // Basic Info
+            html += '<div class="detail-section">';
+            html += '<h3>Algemene Informatie</h3>';
+            html += '<div class="detail-badges">';
+            html += '<span class="machine-badge ' + (machine.type === 'MENGER' ? 'badge-menger' : 'badge-schudder') + '">' + machine.type + '</span>';
+            if (machine.testmodel) {
+                html += '<span class="machine-badge testmodel-badge">TESTMODEL</span>';
+            }
+            html += '</div>';
+            html += '<div class="detail-grid">';
+            html += '<div class="detail-item"><div class="detail-label">Fabrikant:</div><div class="detail-value">' + machine.fabrikant + '</div></div>';
+            html += '<div class="detail-item"><div class="detail-label">Prijs:</div><div class="detail-value">' + (machine.prijs ? '€' + machine.prijs.toLocaleString() : 'Prijs op aanvraag') + '</div></div>';
+            html += '</div></div>';
+            
+            // Technical Specs
+            html += '<div class="detail-section">';
+            html += '<h3>Technische Specificaties</h3>';
+            html += '<div class="detail-grid">';
+            if (machine.vermogen) html += '<div class="detail-item"><div class="detail-label">Vermogen:</div><div class="detail-value">' + machine.vermogen + '</div></div>';
+            if (machine.spanning) html += '<div class="detail-item"><div class="detail-label">Spanning:</div><div class="detail-value">' + machine.spanning + '</div></div>';
+            if (machine.frequentie) html += '<div class="detail-item"><div class="detail-label">Frequentie:</div><div class="detail-value">' + machine.frequentie + '</div></div>';
+            if (machine.capaciteit) html += '<div class="detail-item"><div class="detail-label">Capaciteit:</div><div class="detail-value">' + machine.capaciteit + '</div></div>';
+            if (machine.laadhoogte) html += '<div class="detail-item"><div class="detail-label">Laadhoogte:</div><div class="detail-value">' + machine.laadhoogte + '</div></div>';
+            if (machine.gewicht) html += '<div class="detail-item"><div class="detail-label">Gewicht:</div><div class="detail-value">' + machine.gewicht + '</div></div>';
+            if (machine.geluidsniveau) html += '<div class="detail-item"><div class="detail-label">Geluidsniveau:</div><div class="detail-value">' + machine.geluidsniveau + '</div></div>';
+            html += '</div></div>';
+            
+            // Dimensions
+            if (machine.afmetingen) {
+                html += '<div class="detail-section">';
+                html += '<h3>Afmetingen</h3>';
+                html += '<div class="detail-item"><div class="detail-value">' + machine.afmetingen + '</div></div>';
+                html += '</div>';
+            }
+            
+            // Additional Features
+            html += '<div class="detail-section">';
+            html += '<h3>Aanvullende Eigenschappen</h3>';
+            html += '<div class="detail-grid">';
+            if (machine.schudrichting) html += '<div class="detail-item"><div class="detail-label">Schudrichting:</div><div class="detail-value">' + machine.schudrichting + '</div></div>';
+            if (machine.veiligheidsvoorzieningen) html += '<div class="detail-item"><div class="detail-label">Veiligheidsvoorzieningen:</div><div class="detail-value">' + machine.veiligheidsvoorzieningen + '</div></div>';
+            if (machine.gebruikersinterface) html += '<div class="detail-item"><div class="detail-label">Gebruikersinterface:</div><div class="detail-value">' + machine.gebruikersinterface + '</div></div>';
+            if (machine.connectiviteit) html += '<div class="detail-item"><div class="detail-label">Connectiviteit:</div><div class="detail-value">' + machine.connectiviteit + '</div></div>';
+            if (machine.garantie) html += '<div class="detail-item"><div class="detail-label">Garantie:</div><div class="detail-value">' + machine.garantie + '</div></div>';
+            if (machine.automatisering) html += '<div class="detail-item"><div class="detail-label">Automatisering:</div><div class="detail-value">' + machine.automatisering + '</div></div>';
+            if (machine.safe_mode) html += '<div class="detail-item"><div class="detail-label">Safe mode:</div><div class="detail-value">' + machine.safe_mode + '</div></div>';
+            html += '</div></div>';
+            
+            // Documentation
+            if (machine.documentatie) {
+                html += '<div class="detail-section">';
+                html += '<h3>Documentatie</h3>';
+                html += '<button class="btn-docs" onclick="window.open(\'' + machine.documentatie + '\', \'_blank\')">Open Documentatie</button>';
+                html += '</div>';
+            }
+            
+            modalBody.innerHTML = html;
+            modal.style.display = 'block';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('detailsModal');
+            modal.style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('detailsModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        <!-- Details Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Machine Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
