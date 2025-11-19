@@ -817,64 +817,6 @@ function renderMachines() {
     modal.style.display = 'block';
 }
 
-            html += '<div class="detail-section">';
-            html += '<h3>Algemene Informatie</h3>';
-            html += '<div class="detail-badges">';
-            html += '<span class="machine-badge ' + (machine.type === 'MENGER' ? 'badge-menger' : 'badge-schudder') + '">' + machine.type + '</span>';
-            if (machine.testmodel) {
-                html += '<span class="machine-badge testmodel-badge">TESTMODEL</span>';
-            }
-            html += '</div>';
-            html += '<div class="detail-grid">';
-            html += '<div class="detail-item"><div class="detail-label">Fabrikant:</div><div class="detail-value">' + machine.fabrikant + '</div></div>';
-            html += '<div class="detail-item"><div class="detail-label">Prijs:</div><div class="detail-value">' + (machine.prijs ? '€' + machine.prijs.toLocaleString() : 'Prijs op aanvraag') + '</div></div>';
-            html += '</div></div>';
-            
-            // Technical Specs
-            html += '<div class="detail-section">';
-            html += '<h3>Technische Specificaties</h3>';
-            html += '<div class="detail-grid">';
-            if (machine.vermogen) html += '<div class="detail-item"><div class="detail-label">Vermogen:</div><div class="detail-value">' + machine.vermogen + '</div></div>';
-            if (machine.spanning) html += '<div class="detail-item"><div class="detail-label">Spanning:</div><div class="detail-value">' + machine.spanning + '</div></div>';
-            if (machine.frequentie) html += '<div class="detail-item"><div class="detail-label">Frequentie:</div><div class="detail-value">' + machine.frequentie + '</div></div>';
-            if (machine.capaciteit) html += '<div class="detail-item"><div class="detail-label">Capaciteit:</div><div class="detail-value">' + machine.capaciteit + '</div></div>';
-            if (machine.laadhoogte) html += '<div class="detail-item"><div class="detail-label">Laadhoogte:</div><div class="detail-value">' + machine.laadhoogte + '</div></div>';
-            if (machine.gewicht) html += '<div class="detail-item"><div class="detail-label">Gewicht:</div><div class="detail-value">' + machine.gewicht + '</div></div>';
-            if (machine.geluidsniveau) html += '<div class="detail-item"><div class="detail-label">Geluidsniveau:</div><div class="detail-value">' + machine.geluidsniveau + '</div></div>';
-            html += '</div></div>';
-            
-            // Dimensions
-            if (machine.afmetingen) {
-                html += '<div class="detail-section">';
-                html += '<h3>Afmetingen</h3>';
-                html += '<div class="detail-item"><div class="detail-value">' + machine.afmetingen + '</div></div>';
-                html += '</div>';
-            }
-            
-            // Additional Features
-            html += '<div class="detail-section">';
-            html += '<h3>Aanvullende Eigenschappen</h3>';
-            html += '<div class="detail-grid">';
-            if (machine.schudrichting) html += '<div class="detail-item"><div class="detail-label">Schudrichting:</div><div class="detail-value">' + machine.schudrichting + '</div></div>';
-            if (machine.veiligheidsvoorzieningen) html += '<div class="detail-item"><div class="detail-label">Veiligheidsvoorzieningen:</div><div class="detail-value">' + machine.veiligheidsvoorzieningen + '</div></div>';
-            if (machine.gebruikersinterface) html += '<div class="detail-item"><div class="detail-label">Gebruikersinterface:</div><div class="detail-value">' + machine.gebruikersinterface + '</div></div>';
-            if (machine.connectiviteit) html += '<div class="detail-item"><div class="detail-label">Connectiviteit:</div><div class="detail-value">' + machine.connectiviteit + '</div></div>';
-            if (machine.garantie) html += '<div class="detail-item"><div class="detail-label">Garantie:</div><div class="detail-value">' + machine.garantie + '</div></div>';
-            if (machine.automatisering) html += '<div class="detail-item"><div class="detail-label">Automatisering:</div><div class="detail-value">' + machine.automatisering + '</div></div>';
-            if (machine.safe_mode) html += '<div class="detail-item"><div class="detail-label">Safe mode:</div><div class="detail-value">' + machine.safe_mode + '</div></div>';
-            html += '</div></div>';
-            
-            // Documentation
-            if (machine.documentatie) {
-                html += '<div class="detail-section">';
-                html += '<h3>Documentatie</h3>';
-                html += '<button class="btn-docs" onclick="window.open(\'' + machine.documentatie + '\', \'_blank\')">Open Documentatie</button>';
-                html += '</div>';
-            }
-            
-            modalBody.innerHTML = html;
-            modal.style.display = 'block';
-        }
         
         function closeModal() {
             const modal = document.getElementById('detailsModal');
