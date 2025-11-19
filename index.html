@@ -812,17 +812,6 @@ function renderMachines() {
     html += '</div></div>';
     html += '</div>'; // End modal-sections
     
-    // Footer with buttons
-    html += '<div class="modal-footer">';
-    if (machine.documentatie) {
-        html += '<button class="modal-btn modal-btn-primary" onclick="window.open(\'' + machine.documentatie + '\', \'_blank\')">';
-        html += '📄 Documentatie';
-        html += '</button>';
-    }
-    html += '<button class="modal-btn modal-btn-secondary" onclick="closeModal()">';
-    html += '📞 Contact';
-    html += '</button>';
-    html += '</div>';
     
     modalBody.innerHTML = html;
     modal.style.display = 'block';
