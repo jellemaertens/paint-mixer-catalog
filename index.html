@@ -817,8 +817,16 @@ function renderMachines() {
     modal.style.display = 'block';
 }
 
-            
-            // Basic Info
+        function showMachineDetails(machineId) {
+            const modal = document.getElementById('detailsModal');
+            const modalBody = document.getElementById('modalBody');
+            const machine = machines.find(m => m.id === machineId);
+
+            if (!machine) return;
+
+            let html = '';
+
+    // Basic Info
             html += '<div class="detail-section">';
             html += '<h3>Algemene Informatie</h3>';
             html += '<div class="detail-badges">';
@@ -882,7 +890,8 @@ function renderMachines() {
             const modal = document.getElementById('detailsModal');
             modal.style.display = 'none';
         }
-        
+
+    
         // Close modal when clicking outside
         window.onclick = function(event) {
             const modal = document.getElementById('detailsModal');
