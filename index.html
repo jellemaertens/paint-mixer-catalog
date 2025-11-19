@@ -81,16 +81,18 @@
         .machine-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
+            gap: 15px;
         }
         .machine-card {
             border: 1px solid #ddd;
             border-radius: 12px;
             overflow: hidden;
-            background: white;
+            background: #f0f0f0;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
+			width: 400px;
+            height: 530px;
         }
         .machine-card:hover {
             transform: translateY(-5px);
@@ -107,9 +109,9 @@
         }
                         .machine-image {
             width: 100%;
-                        height: 200px;
+                        height: 220px;
                     object-fit: contain;
-                    background: #f0f0f0;
+                    background: white;
                 }
             background: #f0f0f0;
         }
@@ -136,6 +138,7 @@
             display: flex;
             gap: 8px;
             margin-bottom: 12px;
+			margin-left: 10px;
             flex-wrap: wrap;
         }
         .machine-badge {
@@ -158,7 +161,7 @@
             color: white;
         }
         .machine-price {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             color: #667eea;
             margin-bottom: 15px;
@@ -291,7 +294,7 @@
     margin: 2% auto;
     padding: 0;
     width: 90%;
-    max-width: 1200px;
+    max-width: 800px;
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     max-height: 90vh;
@@ -304,7 +307,7 @@
 
 .modal-image-container {
     text-align: center;
-    background: #f8f9fa;
+    background: white;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -392,7 +395,7 @@
     padding: 12px 20px;
     border: none;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
