@@ -282,6 +282,151 @@
             margin: 0;
             font-size: 24px;
         }
+
+/* Enhanced Modal Styles */
+.modal-content {
+    background-color: white;
+    margin: 2% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.modal-image-container {
+    text-align: center;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.modal-image-container img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+.modal-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.modal-column h3 {
+    color: #667eea;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.modal-info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.modal-info-label {
+    font-weight: 600;
+    color: #555;
+    flex: 0 0 45%;
+}
+
+.modal-info-value {
+    color: #333;
+    flex: 1;
+    text-align: right;
+}
+
+.modal-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.modal-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.modal-section h3 {
+    color: #667eea;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 15px;
+    padding: 20px 30px;
+    background: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+    border-radius: 0 0 12px 12px;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.modal-btn-primary {
+    background: #17a2b8;
+    color: white;
+}
+
+.modal-btn-primary:hover {
+    background: #138496;
+}
+
+.modal-btn-secondary {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.modal-btn-secondary:hover {
+    background: #667eea;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .modal-columns,
+    .modal-sections {
+        grid-template-columns: 1fr;
+    }
+}
+
         
         .close {
             color: white;
@@ -494,22 +639,195 @@ function renderMachines() {
         renderMachines();
     </script>
 
-            // Details Modal Functions
-            function showMachineDetails(machineId) {
+           function showMachineDetails(machineId) {
+    const machine = machines.find(m => m.id === machineId);
+    const modal = document.getElementById('detailsModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    
+    modalTitle.textContent = machine.naam;
+    
+    let html = '';
+    
+    // Image Section
+    if (machine.afbeelding) {
+        html += '<div class="modal-image-container">';
+        html += '<img src="' + machine.afbeelding + '" alt="' + machine.naam + '">';
+        html += '</div>';
+    }
+    
+    // Two Column Layout
+    html += '<div class="modal-columns">';
+    
+    // Left Column - Algemene Informatie
+    html += '<div class="modal-column">';
+    html += '<h3>Algemene Informatie</h3>';
+    html += '<div class="modal-info-grid">';
+    
+    html += '<div class="modal-info-row">';
+    html += '<div class="modal-info-label">Fabrikant</div>';
+    html += '<div class="modal-info-value">' + machine.fabrikant + '</div>';
+    html += '</div>';
+    
+    html += '<div class="modal-info-row">';
+    html += '<div class="modal-info-label">Type</div>';
+    html += '<div class="modal-info-value">' + machine.type + '</div>';
+    html += '</div>';
+    
+    html += '<div class="modal-info-row">';
+    html += '<div class="modal-info-label">Prijs</div>';
+    html += '<div class="modal-info-value">' + (machine.prijs ? '€ ' + machine.prijs.toLocaleString() : 'Prijs op aanvraag') + '</div>';
+    html += '</div>';
+    
+    if (machine.garantie) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Garantie</div>';
+        html += '<div class="modal-info-value">' + machine.garantie + '</div>';
+        html += '</div>';
+    }
+    
+    html += '</div></div>';
+    
+    // Right Column - Technische Specificaties
+    html += '<div class="modal-column">';
+    html += '<h3>Technische Specificaties</h3>';
+    html += '<div class="modal-info-grid">';
+    
+    if (machine.vermogen) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Vermogen</div>';
+        html += '<div class="modal-info-value">' + machine.vermogen + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.spanning) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Spanning</div>';
+        html += '<div class="modal-info-value">' + machine.spanning + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.frequentie) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Frequentie</div>';
+        html += '<div class="modal-info-value">' + machine.frequentie + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.afmetingen) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Afmetingen (BxDxH)</div>';
+        html += '<div class="modal-info-value">' + machine.afmetingen + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.gewicht) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Gewicht</div>';
+        html += '<div class="modal-info-value">' + machine.gewicht + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.capaciteit) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Max. Capaciteit</div>';
+        html += '<div class="modal-info-value">' + machine.capaciteit + '</div>';
+        html += '</div>';
+    }
+    
+    html += '</div></div>';
+    html += '</div>'; // End modal-columns
+    
+    // Bottom Two Sections
+    html += '<div class="modal-sections">';
+    
+    // Prestaties Section
+    html += '<div class="modal-section">';
+    html += '<h3>Prestaties</h3>';
+    html += '<div class="modal-info-grid">';
+    
+    if (machine.bedrijfssnelheid) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Bedrijfssnelheid</div>';
+        html += '<div class="modal-info-value">' + machine.bedrijfssnelheid + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.geluidsniveau) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Geluidsniveau</div>';
+        html += '<div class="modal-info-value">' + machine.geluidsniveau + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.schudrichting) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Schudrichting</div>';
+        html += '<div class="modal-info-value">' + machine.schudrichting + '</div>';
+        html += '</div>';
+    }
+    
+    html += '</div></div>';
+    
+    // Functies & Onderhoud Section
+    html += '<div class="modal-section">';
+    html += '<h3>Functies & Onderhoud</h3>';
+    html += '<div class="modal-info-grid">';
+    
+    if (machine.veiligheidsvoorzieningen) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Veiligheidsvoorzieningen</div>';
+        html += '<div class="modal-info-value">' + machine.veiligheidsvoorzieningen + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.automatisering) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Automatiseringsniveau</div>';
+        html += '<div class="modal-info-value">' + machine.automatisering + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.gebruikersinterface) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Gebruikersinterface</div>';
+        html += '<div class="modal-info-value">' + machine.gebruikersinterface + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.connectiviteit) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Connectiviteit</div>';
+        html += '<div class="modal-info-value">' + machine.connectiviteit + '</div>';
+        html += '</div>';
+    }
+    
+    if (machine.onderhoudsfrequentie) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Onderhoudsfrequentie</div>';
+        html += '<div class="modal-info-value">' + machine.onderhoudsfrequentie + '</div>';
+        html += '</div>';
+    }
+    
+    html += '</div></div>';
+    html += '</div>'; // End modal-sections
+    
+    // Footer with buttons
+    html += '<div class="modal-footer">';
+    if (machine.documentatie) {
+        html += '<button class="modal-btn modal-btn-primary" onclick="window.open(\'' + machine.documentatie + '\', \'_blank\')">';
+        html += '📄 Documentatie';
+        html += '</button>';
+    }
+    html += '<button class="modal-btn modal-btn-secondary" onclick="closeModal()">';
+    html += '📞 Contact';
+    html += '</button>';
+    html += '</div>';
+    
+    modalBody.innerHTML = html;
+    modal.style.display = 'block';
+}
 
-                const machine = machines.find(m => m.id === machineId);
-        <script>
-            const modalTitle = document.getElementById('modalTitle');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalTitle.textContent = machine.naam;
-            
-            let html = '';
-            
-            // Image
-            if (machine.afbeelding) {
-                html += '<img src="' + machine.afbeelding + '" alt="' + machine.naam + '" class="machine-detail-image">';
-            }
             
             // Basic Info
             html += '<div class="detail-section">';
