@@ -538,10 +538,12 @@
                 </select>
             </div>
             <div class="filter-group">
-                <label for="filterPrijsMax">Max Prijs (€):</label>
-                <input type="number" id="filterPrijsMax" placeholder="Geen maximum">
-            </div>
-        </div>
+                <label for="filterTestmodel">Testmodel:</label>
+                <select id="filterTestmodel">
+                    <option value="">Alle machines</option>
+                    <option value="testmodel">Alleen testmodels</option>
+                </select>
+            </div>        </div>
         
         <div class="machine-grid" id="machineGrid"></div>
     </div>
@@ -569,7 +571,7 @@
 function renderMachines() {
     const fabrikantFilter = document.getElementById('filterFabrikant').value;
     const typeFilter = document.getElementById('filterType').value;
-    const prijsMax = document.getElementById('filterPrijsMax').value;
+        const testmodelFilter = document.getElementById('filterTestmodel').value;
     
     let filtered = machines;
     
@@ -579,10 +581,9 @@ function renderMachines() {
     if (typeFilter) {
         filtered = filtered.filter(m => m.type === typeFilter);
     }
-    if (prijsMax) {
-        filtered = filtered.filter(m => m.prijs <= parseFloat(prijsMax));
-    }
-    
+        if (testmodelFilter === 'testmodel') {
+            filtered = filtered.filter(m => m.testmodel === true);
+        }
     const grid = document.getElementById('machineGrid');
     
     // Gebruik string concatenatie in plaats van template literals
@@ -633,7 +634,7 @@ function renderMachines() {
         // Event listeners
         document.getElementById('filterFabrikant').addEventListener('change', renderMachines);
         document.getElementById('filterType').addEventListener('change', renderMachines);
-        document.getElementById('filterPrijsMax').addEventListener('input', renderMachines);
+                document.getElementById('filterTestmodel').addEventListener('change', renderMachines);
         
         // Initialiseer
         renderStats();
