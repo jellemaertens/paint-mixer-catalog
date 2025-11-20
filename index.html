@@ -697,6 +697,30 @@ function renderMachines() {
         html += '<div class="modal-info-value">' + machine.garantie + '</div>';
         html += '</div>';
     }
+
+                // Verzendkosten
+                if (machine.verzendkosten) {
+                    html += '<div class="modal-info-row">';
+                    html += '<div class="modal-info-label">Verzendkosten</div>';
+                    html += '<div class="modal-info-value">' + machine.verzendkosten + '</div>';
+                    html += '</div>';
+                }
+
+                // MOQ
+                if (machine.moq) {
+                    html += '<div class="modal-info-row">';
+                    html += '<div class="modal-info-label">MOQ</div>';
+                    html += '<div class="modal-info-value">' + machine.moq + '</div>';
+                    html += '</div>';
+                }
+
+                // Return Policy
+                if (machine.returnPolicy) {
+                    html += '<div class="modal-info-row">';
+                    html += '<div class="modal-info-label">Return Policy</div>';
+                    html += '<div class="modal-info-value">' + machine.returnPolicy + '</div>';
+                    html += '</div>';
+                }
     
     html += '</div></div>';
     
