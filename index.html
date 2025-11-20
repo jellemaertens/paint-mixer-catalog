@@ -594,6 +594,7 @@ function renderMachines() {
         const badgeClass = machine.type === 'MENGER' ? 'badge-menger' : 'badge-schudder';
         const testmodelBadge = machine.testmodel ? '<span class="machine-badge testmodel-badge">TESTMODEL</span>' : '';
         const prijs = machine.prijs ? '€' + machine.prijs.toLocaleString() : 'Prijs op aanvraag';
+		            const prijs2026 = machine.prijs2026 ? '€' + machine.prijs2026.toLocaleString() : 'Op aanvraag';
         
         return '<div class="machine-card">' +
             '<input type="checkbox" class="machine-checkbox" data-id="' + machine.id + '">' +
@@ -608,6 +609,7 @@ function renderMachines() {
                     testmodelBadge +
                 '</div>' +
                 '<div class="machine-price">' + prijs + '</div>' +
+			                '<div class="machine-price-2026">' + prijs2026 + '</div>' +
                 '<div class="machine-specs">' +
                     '<div><strong>Vermogen:</strong> <span>' + machine.vermogen + '</span></div>' +
                     '<div><strong>Capaciteit:</strong> <span>' + machine.capaciteit + '</span></div>' +
@@ -684,6 +686,11 @@ function renderMachines() {
     html += '<div class="modal-info-row">';
     html += '<div class="modal-info-label">Prijs</div>';
     html += '<div class="modal-info-value">' + (machine.prijs ? '€ ' + machine.prijs.toLocaleString() : 'Prijs op aanvraag') + '</div>';
+    html += '</div>';
+
+			       html += '<div class="modal-info-row">';
+    html += '<div class="modal-info-label">Prijs 2026</div>';
+    html += '<div class="modal-info-value">' + (machine.prijs2026 ? '€' + machine.prijs2026.toLocaleString() : 'Op aanvraag') + '</div>';
     html += '</div>';
     
     if (machine.garantie) {
