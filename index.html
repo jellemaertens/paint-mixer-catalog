@@ -594,7 +594,7 @@ function renderMachines() {
     grid.innerHTML = filtered.map(function(machine) {
         const badgeClass = machine.type === 'MENGER' ? 'badge-menger' : 'badge-schudder';
         const testmodelBadge = machine.testmodel ? '<span class="machine-badge testmodel-badge">TESTMODEL</span>' : '';
-        const prijs = machine.prijs ? '€' + machine.prijs.toLocaleString() : 'Prijs op aanvraag';
+        const prijs = machine.prijs ? '€ ' + machine.prijs.toLocaleString() : 'Prijs op aanvraag';
         
         return '<div class="machine-card">' +
             '<input type="checkbox" class="machine-checkbox" data-id="' + machine.id + '">' +
