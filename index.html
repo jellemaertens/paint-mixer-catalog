@@ -104,7 +104,7 @@
             width: 100%;
                         height: 220px;
                     object-fit: contain;
-                    background: white;
+                    background: white;				
                 }
             background: #f0f0f0;
         }
@@ -213,32 +213,6 @@
         .btn-docs:hover {
             background: #17a2b8;
             color: white;
-        }
-        .machine-note {
-            border-top: 1px solid #e0e0e0;
-            padding-top: 15px;
-        }
-        .note-label {
-            font-size: 13px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 8px;
-        }
-        .note-textarea {
-            width: 100%;
-            padding: 7px;min-height: 50px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 13px;
-            font-family: Arial, sans-serif;
-            resize: vertical;
-        }
-        .note-counter {
-            text-align: right;
-            font-size: 12px;
-            color: #999;
-            margin-top: 4px;
         }
 
                 /* Details Modal */
@@ -609,20 +583,10 @@ function renderMachines() {
                 '<div class="machine-buttons">' +
                                         '<button class="btn-details" onclick="showMachineDetails(' + machine.id + ')">Details</button>' +
                     '<button class="btn-docs" onclick="window.open(\'' + machine.documentatie + '\', \'_blank\')">Documentatie</button>' +
-                    '<textarea class="note-textarea" data-id="' + machine.id + '" maxlength="500" placeholder="Voeg een notitie toe (max 500 tekens)..."></textarea>' +
-                    '<div class="note-counter"><span class="char-count">0</span>/500</div>' +
                 '</div>' +
             '</div>' +
         '</div>';
     }).join('');
-    
-    // Add event listeners for textareas
-    document.querySelectorAll('.note-textarea').forEach(textarea => {
-        textarea.addEventListener('input', function() {
-            const counter = this.nextElementSibling.querySelector('.char-count');
-            counter.textContent = this.value.length;
-        });
-    });
 }
 
         
@@ -674,7 +638,7 @@ function renderMachines() {
     html += '</div>';
     
     html += '<div class="modal-info-row">';
-    html += '<div class="modal-info-label">Prijs</div>';
+    html += '<div class="modal-info-label">Prijs 2025</div>';
     html += '<div class="modal-info-value">' + (machine.prijs ? '€ ' + machine.prijs.toLocaleString() : 'Prijs op aanvraag') + '</div>';
     html += '</div>';
 
