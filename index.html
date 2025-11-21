@@ -624,14 +624,16 @@ function renderMachines() {
     const modalBody = document.getElementById('modalBody');
     
     modalTitle.textContent = machine.naam;
-    
+	    
     let html = '';
     
     // Image Section
     if (machine.afbeelding) {
         html += '<div class="modal-image-container">';
         html += '<img src="' + machine.afbeelding + '" alt="' + machine.naam + '">';
-        html += '</div>';
+		 html += '<img src="' + machine.logo + '" alt="Logo ' + machine.fabrikant + '" ' +
+        'style="position:relative; right:10px; top:10px; height:40px;" />';
+    html += '</div>';
     }
     
     // Two Column Layout
