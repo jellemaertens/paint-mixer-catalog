@@ -14,7 +14,7 @@
         }
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #278EF5 50%, #1500F2 100%);
+            background: #278EF5;
             min-height: 100vh;
             padding: 20px;
         }
@@ -110,7 +110,18 @@
         }
         .machine-content {
             padding: 20px;
+			  position: relative;
         }
+		.machine-logo {
+			position: absolute;
+			bottom: 310px;
+			right: 18px;
+		}
+		.machine-logo img {
+			width: 80px;
+			height: auto;
+		}
+        
         .machine-header {
             margin-bottom: 12px;
         }
@@ -574,6 +585,10 @@ function renderMachines() {
                     testmodelBadge +
                 '</div>' +
                 '<div class="machine-price">' + prijs + '</div>' +
+				
+				            // --- Voeg hier het logo toe ---
+            '<div class="machine-logo"><img src="' + machine.logo + '" alt="Logo ' + machine.fabrikant + '" style="width: 80px; height: auto; margin: 10px 0;" /></div>' +
+            // --- Einde toevoegen logo ---
                 '<div class="machine-specs">' +
                     '<div><strong>Vermogen:</strong> <span>' + machine.vermogen + '</span></div>' +
                     '<div><strong>Capaciteit:</strong> <span>' + machine.capaciteit + '</span></div>' +
