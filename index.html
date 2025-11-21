@@ -99,15 +99,7 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
-        .machine-checkbox {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            width: 24px;
-            height: 24px;
-            z-index: 10;
-            cursor: pointer;
-        }
+        
                         .machine-image {
             width: 100%;
                         height: 220px;
@@ -597,7 +589,6 @@ function renderMachines() {
         const prijs = machine.prijs ? '€ ' + machine.prijs.toLocaleString() : 'Prijs op aanvraag';
         
         return '<div class="machine-card">' +
-            '<input type="checkbox" class="machine-checkbox" data-id="' + machine.id + '">' +
             '<img src="' + machine.afbeelding + '" alt="' + machine.naam + '" class="machine-image">' +
             '<div class="machine-content">' +
                 '<div class="machine-header">' +
