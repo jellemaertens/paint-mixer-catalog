@@ -84,6 +84,11 @@
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 15px;
         }
+		.machine-card-container {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 1rem;
+}
         .machine-card {
             border: 1px solid #ddd;
             border-radius: 12px;
@@ -94,6 +99,9 @@
             position: relative;
 			width: 400px;
             height: 530px;
+			aspect-ratio: 4/3;
+			width: 100%;
+			box-sizing: border-box;
         }
         .machine-card:hover {
             transform: translateY(-5px);
@@ -586,9 +594,9 @@ function renderMachines() {
                 '</div>' +
                 '<div class="machine-price">' + prijs + '</div>' +
 				
-				            // --- Voeg hier het logo toe ---
+		// --- Brand logo ---
             '<div class="machine-logo"><img src="' + machine.logo + '" alt="Logo ' + machine.fabrikant + '" style="width: 80px; height: auto; margin: 10px 0;" /></div>' +
-            // --- Einde toevoegen logo ---
+        // --- brand logo ---
                 '<div class="machine-specs">' +
                     '<div><strong>Vermogen:</strong> <span>' + machine.vermogen + '</span></div>' +
                     '<div><strong>Capaciteit:</strong> <span>' + machine.capaciteit + '</span></div>' +
@@ -670,29 +678,30 @@ function renderMachines() {
         html += '<div class="modal-info-value">' + machine.garantie + '</div>';
         html += '</div>';
     }
-
-// Verzendkosten    
+	
+	// Verzendkosten 
+if (machine.verzendkosten) {	
     html += '<div class="modal-info-row">';
     html += '<div class="modal-info-label">Verzendkosten:</div>';
     html += '<div class="modal-info-value">' + machine.verzendkosten + '</div>';
     html += '</div>';
-    
+    }
 
 // MOQ
-    
+    if (machine.MOQ) {
     html += '<div class="modal-info-row">';
     html += '<div class="modal-info-label">MOQ:</div>';
     html += '<div class="modal-info-value">' + machine.MOQ + '</div>';
     html += '</div>';
-    
+    }
 
 // Return Policy
-    
+    if (machine.returnPolicy) {
     html += '<div class="modal-info-row">';
     html += '<div class="modal-info-label">Return Policy:</div>';
     html += '<div class="modal-info-value">' + machine.returnPolicy + '</div>';
     html += '</div>';
-            
+     }     
     
     html += '</div></div>';
     
@@ -742,19 +751,7 @@ function renderMachines() {
         html += '<div class="modal-info-value">' + machine.capaciteit + '</div>';
         html += '</div>';
     }
-    
-    html += '</div></div>';
-    html += '</div>'; // End modal-columns
-    
-    // Bottom Two Sections
-    html += '<div class="modal-sections">';
-    
-    // Prestaties Section
-    html += '<div class="modal-section">';
-    html += '<h3>Prestaties</h3>';
-    html += '<div class="modal-info-grid">';
-    
-    if (machine.bedrijfssnelheid) {
+	    if (machine.bedrijfssnelheid) {
         html += '<div class="modal-info-row">';
         html += '<div class="modal-info-label">Bedrijfssnelheid</div>';
         html += '<div class="modal-info-value">' + machine.bedrijfssnelheid + '</div>';
@@ -774,6 +771,41 @@ function renderMachines() {
         html += '<div class="modal-info-value">' + machine.schudrichting + '</div>';
         html += '</div>';
     }
+    
+    html += '</div></div>';
+    html += '</div>'; // End modal-columns
+    
+    // Bottom Two Sections
+    html += '<div class="modal-sections">';
+    
+    // Bestel info Section
+    html += '<div class="modal-section">';
+    html += '<h3>Bestel info</h3>';
+    html += '<div class="modal-info-grid">';
+	
+	// Verzendkosten    
+    html += '<div class="modal-info-row">';
+    html += '<div class="modal-info-label">Verzendkosten:</div>';
+    html += '<div class="modal-info-value">' + machine.verzendkosten + '</div>';
+    html += '</div>';
+    
+
+// MOQ
+    
+    html += '<div class="modal-info-row">';
+    html += '<div class="modal-info-label">MOQ:</div>';
+    html += '<div class="modal-info-value">' + machine.MOQ + '</div>';
+    html += '</div>';
+    
+
+// Return Policy
+    
+    html += '<div class="modal-info-row">';
+    html += '<div class="modal-info-label">Return Policy:</div>';
+    html += '<div class="modal-info-value">' + machine.returnPolicy + '</div>';
+    html += '</div>';
+    
+
     
     html += '</div></div>';
     
@@ -816,6 +848,13 @@ function renderMachines() {
         html += '<div class="modal-info-value">' + machine.onderhoudsfrequentie + '</div>';
         html += '</div>';
     }
+	
+	    if (machine.testopties) {
+        html += '<div class="modal-info-row">';
+        html += '<div class="modal-info-label">Testopties</div>';
+        html += '<div class="modal-info-value">' + machine.testopties + '</div>';
+        html += '</div>';
+	}
     
     html += '</div></div>';
     html += '</div>'; // End modal-sections
