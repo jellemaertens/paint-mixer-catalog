@@ -683,7 +683,7 @@ function renderMachines() {
 if (machine.verzendkosten) {	
     html += '<div class="modal-info-row">';
     html += '<div class="modal-info-label">Verzendkosten:</div>';
-    html += '<div class="modal-info-value">' + machine.verzendkosten + '</div>';
+    html += '<div class="modal-info-value">' + (machine.verzendkosten ? '€ ' + machine.verzendkosten.toLocaleString() : 'Op aanvraag') + '</div>';
     html += '</div>';
     }
 
@@ -786,7 +786,7 @@ if (machine.verzendkosten) {
 	// Verzendkosten    
     html += '<div class="modal-info-row">';
     html += '<div class="modal-info-label">Verzendkosten:</div>';
-    html += '<div class="modal-info-value">' + machine.verzendkosten + '</div>';
+    html += '<div class="modal-info-value">' + (machine.verzendkosten ? '€ ' + machine.verzendkosten.toLocaleString() : 'Op aanvraag') + '</div>';
     html += '</div>';
     
 
