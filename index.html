@@ -129,7 +129,7 @@
 			width: 80px;
 			height: auto;
 		}
-        
+	
         .machine-header {
             margin-bottom: 12px;
         }
@@ -140,6 +140,18 @@
             margin-bottom: 5px;
                     margin-left: 10px;
         }
+			
+		.machine-mengrichting {
+			position: absolute;
+			top: 250px;
+			right: 10px;
+		}
+
+		.machine-mengrichting img {
+			height: 80px;
+			width: auto;
+		}
+        
         .machine-manufacturer {
             color: #666;
             font-size: 14px;
@@ -580,6 +592,9 @@ function renderMachines() {
         const badgeClass = machine.type === 'MENGER' ? 'badge-menger' : 'badge-schudder';
         const testmodelBadge = machine.testmodel ? '<span class="machine-badge testmodel-badge">TESTMODEL</span>' : '';
         const prijs = machine.prijs ? '€ ' + machine.prijs.toLocaleString() : 'Prijs op aanvraag';
+	
+  
+
         
         return '<div class="machine-card">' +
             '<img src="' + machine.afbeelding + '" alt="' + machine.naam + '" class="machine-image">' +
@@ -593,7 +608,8 @@ function renderMachines() {
                     testmodelBadge +
                 '</div>' +
                 '<div class="machine-price">' + prijs + '</div>' +
-				
+				// --- Mengrichting logo ---
+               '<div class="machine-mengrichting"><img src="' + machine.mengrichting + '"/> </div>' +
 		// --- Brand logo ---
             '<div class="machine-logo"><img src="' + machine.logo + '" alt="Logo ' + machine.fabrikant + '" style="width: 80px; height: auto; margin: 10px 0;" /></div>' +
         // --- brand logo ---
@@ -679,13 +695,6 @@ function renderMachines() {
         html += '</div>';
     }
 	
-	// Verzendkosten 
-if (machine.verzendkosten) {	
-    html += '<div class="modal-info-row">';
-    html += '<div class="modal-info-label">Verzendkosten:</div>';
-    html += '<div class="modal-info-value">' + (machine.verzendkosten ? '€ ' + machine.verzendkosten.toLocaleString() : 'Op aanvraag') + '</div>';
-    html += '</div>';
-    }
 
 // MOQ
     if (machine.MOQ) {
@@ -786,9 +795,15 @@ if (machine.verzendkosten) {
 	// Verzendkosten    
     html += '<div class="modal-info-row">';
     html += '<div class="modal-info-label">Verzendkosten:</div>';
-    html += '<div class="modal-info-value">' + (machine.verzendkosten ? '€ ' + machine.verzendkosten.toLocaleString() : 'Op aanvraag') + '</div>';
+    html += '<div class="modal-info-value">' + machine.verzendkosten + '</div>';
     html += '</div>';
+
+// Levertermijn
     
+    html += '<div class="modal-info-row">';
+    html += '<div class="modal-info-label">levertermijn:</div>';
+    html += '<div class="modal-info-value">' + machine.levertermijn + '</div>';
+    html += '</div>';    
 
 // MOQ
     
